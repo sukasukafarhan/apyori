@@ -10,7 +10,7 @@ import argparse
 import json
 import os
 from collections import namedtuple
-from itertools import combinations
+from itertools import combinations, permutations
 from itertools import chain
 
 
@@ -212,7 +212,7 @@ def gen_ordered_statistics(transaction_manager, record):
         record -- A support record as a SupportRecord instance.
     """
     items = record.items
-    for combination_set in combinations(sorted(items), len(items) - 1):
+    for combination_set in permutations(sorted(items), len(items) - 1):
         items_base = frozenset(combination_set)
         items_add = frozenset(items.difference(items_base))
         confidence = (
